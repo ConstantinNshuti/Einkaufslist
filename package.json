@@ -1,0 +1,21 @@
+{
+  "name": "einkaufslist",
+  "version": "1.0.0",
+  "description": "",
+  "main": "einkauf_server.js",
+  "scripts": {
+    "devStart": "nodemon einkauf_server.js"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "@types/sqlite3": "^3.1.8",
+    "express": "^4.18.2",
+    "fs": "^0.0.1-security",
+    "sqlite3": "^5.1.4"
+  },
+  "devDependencies": {
+    "nodemon": "^2.0.20"
+  }
+}

@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Einkaufsliste</title>
+    <link rel="stylesheet" type="text/css" href="/styles/einkaufslist.css"/>
+    <script src="/script/einkaufslist.js"></script>
+</head>
+
+<body>
+<header>
+    <div class="shadow">
+        <h1>
+            Einkaufslist
+        </h1>
+    </div>
+</header>
+
+<main class="shadow">
+    <section class="as-m-t-b">
+
+        <div>
+            <form id="form-eingabe">
+                <label for="user-name"> Wer: </label>
+                <input id="user-name"  type="text" required placeholder="Wer kauft ein?" >
+            </form>
+        </div>
+<div id="einkauf-liste" class="as-unsichtbar">
+    <div>
+    <h5> Einkaufsliste</h5>
+    </div>
+    <div id="einkauf-save" class="as-unsichtbar">
+        <form id="aktionen" class="as-m-t-bt">
+            <label for="aktionen">Besorgen: </label>
+            <input  type="submit" class="as-button" value="Neu">
+            <input  type="submit" class="as-button" value="Sichern">
+
+        </form>
+    </div>
+        <table id="einkauf-table" class="as-tb-width-100">
+            <thead id="einkauf-thead">
+            <tr>
+                <th class="as-first-column" class="who">Zuordnung</th>
+                <th class="as-second-column" class="what">Was</th>
+                <th class="as-third-column" class="where">Wo</th>
+                <th class="as-forth-column" class="daten">Wann</th>
+
+            </tr>
+            </thead>
+            <tbody id="einkauf-tbody">
+
+            </tbody>
+
+            <tfoot id="einkauf-tfoot">
+            <tr >
+                <td >
+                </td>
+            </tr>
+            </tfoot>
+        </table>
+</div>
+    </section>
+</main>
+
+<div class="-shadow">
+
+</div>
+
+</body>
+<footer class="shadow">
+    <p>
+        "Einkaufsliste" ist eine interne Website von Constantin Nshuti für die zweite Hausübung
+        im Umfeld der Webentwicklung an der Technischen Hochschule Mittelhessen (THM). Sie dient
+        ausschließlich Zwecken der Lehre und ist nicht zur externen Veröffentlichung
+        bestimmt und freigegeben
+    </p>
+    <p>
+        Autor: Constantin Nshuti
+    </p>
+
+    <p>
+        E-mail: <a href="constantin.nshuti@mni.thm.de">constantin.nshuti@mni.thm.de</a>
+    </p>
+    <p>
+        Website: <a href="https://cv.geek237.com/nshuti/">www.nshuti.com</a>
+    </p>
+</footer>
+</html>
