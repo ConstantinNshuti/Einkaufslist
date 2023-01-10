@@ -1,8 +1,23 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="63ea5b3d-8383-4f5b-819e-872d79fd83bf" name="Changes" comment="Add">
-      <change afterPath="$PROJECT_DIR$/.gitignore" afterDir="false" />
+    <list default="true" id="63ea5b3d-8383-4f5b-819e-872d79fd83bf" name="Changes" comment="Initial commit">
+      <change afterPath="$PROJECT_DIR$/.idea/httpRequests/2023-01-03T215534.200.icon" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/httpRequests/2023-01-04T195438.200.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/httpRequests/2023-01-04T195818.200.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/httpRequests/2023-01-09T110752.200.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/httpRequests/2023-01-09T135445.200.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/images/cart.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/log/logEinkaufsListe.json" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/log/logEinkaufsListe_2023-01-09T10:07:31.418Z.json" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/script/EinkaufsListe.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/einkauf_server.js" beforeDir="false" afterPath="$PROJECT_DIR$/einkauf_server.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/einkauf_server.ts" beforeDir="false" afterPath="$PROJECT_DIR$/einkauf_server.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/html/einkaufslist.html" beforeDir="false" afterPath="$PROJECT_DIR$/html/einkaufslist.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/script/einkaufslist.js" beforeDir="false" afterPath="$PROJECT_DIR$/http/einkaufsListe.http" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/script/einkaufslist.ts" beforeDir="false" afterPath="$PROJECT_DIR$/script/EinkaufsListe.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/styles/einkaufslist.css" beforeDir="false" afterPath="$PROJECT_DIR$/styles/einkaufslist.css" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -14,12 +29,16 @@
       <list>
         <option value="HTML File" />
         <option value="CSS File" />
+        <option value="HTTP Request" />
         <option value="TypeScript File" />
       </list>
     </option>
   </component>
   <component name="Git.Settings">
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
+  </component>
+  <component name="HighlightingSettingsPerFile">
+    <setting file="file://$PROJECT_DIR$/einkauf_server.ts" root0="SKIP_INSPECTION" />
   </component>
   <component name="MarkdownSettingsMigration">
     <option name="stateVersion" value="1" />
@@ -35,11 +54,13 @@
   <component name="PropertiesComponent"><![CDATA[{
   "keyToString": {
     "ASKED_ADD_EXTERNAL_FILES": "true",
+    "ASKED_SHARE_PROJECT_CONFIGURATION_FILES": "true",
     "DefaultHtmlFileTemplate": "HTML File",
     "RunOnceActivity.OpenProjectViewOnStart": "true",
     "RunOnceActivity.ShowReadmeOnStart": "true",
+    "SHARE_PROJECT_CONFIGURATION_FILES": "true",
     "WebServerToolWindowFactoryState": "false",
-    "last_opened_file_path": "/Users/constantinn/WebstormProjects/Einkaufslist",
+    "last_opened_file_path": "/Users/constantinn/WebstormProjects/Einkaufslist/images",
     "list.type.of.created.stylesheet": "CSS",
     "nodejs_package_manager_path": "npm",
     "settings.editor.selected.configurable": "settings.typescriptcompiler",
@@ -47,6 +68,37 @@
     "vue.rearranger.settings.migration": "true"
   }
 }]]></component>
+  <component name="RecentsManager">
+    <key name="CopyFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$/images" />
+    </key>
+  </component>
+  <component name="RunManager" selected="HTTP Request.einkaufsListe | read">
+    <configuration name="einkaufsListe | create#3" type="HttpClient.HttpRequestRunConfigurationType" factoryName="HTTP Request" temporary="true" nameIsGenerated="true" path="$PROJECT_DIR$/http/einkaufsListe.http" index="7" requestIdentifier="create#3" runType="Run single request">
+      <method v="2" />
+    </configuration>
+    <configuration name="einkaufsListe | delete" type="HttpClient.HttpRequestRunConfigurationType" factoryName="HTTP Request" temporary="true" nameIsGenerated="true" path="$PROJECT_DIR$/http/einkaufsListe.http" index="9" requestIdentifier="delete" runType="Run single request">
+      <method v="2" />
+    </configuration>
+    <configuration name="einkaufsListe | read" type="HttpClient.HttpRequestRunConfigurationType" factoryName="HTTP Request" temporary="true" nameIsGenerated="true" path="$PROJECT_DIR$/http/einkaufsListe.http" index="8" requestIdentifier="read" runType="Run single request">
+      <method v="2" />
+    </configuration>
+    <configuration name="einkaufsListe | udate" type="HttpClient.HttpRequestRunConfigurationType" factoryName="HTTP Request" temporary="true" nameIsGenerated="true" path="$PROJECT_DIR$/http/einkaufsListe.http" index="9" requestIdentifier="udate" runType="Run single request">
+      <method v="2" />
+    </configuration>
+    <configuration name="einkaufsListe | version" type="HttpClient.HttpRequestRunConfigurationType" factoryName="HTTP Request" temporary="true" nameIsGenerated="true" path="$PROJECT_DIR$/http/einkaufsListe.http" index="2" requestIdentifier="version" runType="Run single request">
+      <method v="2" />
+    </configuration>
+    <recent_temporary>
+      <list>
+        <item itemvalue="HTTP Request.einkaufsListe | read" />
+        <item itemvalue="HTTP Request.einkaufsListe | udate" />
+        <item itemvalue="HTTP Request.einkaufsListe | delete" />
+        <item itemvalue="HTTP Request.einkaufsListe | create#3" />
+        <item itemvalue="HTTP Request.einkaufsListe | version" />
+      </list>
+    </recent_temporary>
+  </component>
   <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
   <component name="TaskManager">
     <task active="true" id="Default" summary="Default task">
@@ -56,7 +108,7 @@
       <option name="presentableId" value="Default" />
       <updated>1672237735317</updated>
       <workItem from="1672237736552" duration="367000" />
-      <workItem from="1672238127104" duration="31633000" />
+      <workItem from="1672238127104" duration="102901000" />
     </task>
     <task id="LOCAL-00001" summary="Add">
       <created>1672237851173</created>
@@ -65,7 +117,14 @@
       <option name="project" value="LOCAL" />
       <updated>1672237851173</updated>
     </task>
-    <option name="localTasksCounter" value="2" />
+    <task id="LOCAL-00002" summary="Initial commit">
+      <created>1672704414927</created>
+      <option name="number" value="00002" />
+      <option name="presentableId" value="LOCAL-00002" />
+      <option name="project" value="LOCAL" />
+      <updated>1672704414927</updated>
+    </task>
+    <option name="localTasksCounter" value="3" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -73,7 +132,6 @@
     <option name="exactExcludedFiles">
       <list>
         <option value="$PROJECT_DIR$/einkauf_server.js" />
-        <option value="$PROJECT_DIR$/script/einkaufslist.js" />
       </list>
     </option>
   </component>
@@ -91,6 +149,7 @@
   <component name="VcsManagerConfiguration">
     <option name="ADD_EXTERNAL_FILES_SILENTLY" value="true" />
     <MESSAGE value="Add" />
-    <option name="LAST_COMMIT_MESSAGE" value="Add" />
+    <MESSAGE value="Initial commit" />
+    <option name="LAST_COMMIT_MESSAGE" value="Initial commit" />
   </component>
 </project>

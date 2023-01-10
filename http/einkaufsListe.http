@@ -1,0 +1,75 @@
+### save
+GET http://localhost:3000/save
+
+### version
+GET http://localhost:3000/version
+
+### favicon
+GET http://localhost:3000/favicon.ico
+
+### start site
+GET http://localhost:3000
+
+### create
+POST http://localhost:3000/create
+Content-Type: application/json
+
+{
+  "who" : "Nshuti",
+  "what": "Rice und   Kartoffel",
+  "date": "2023-01-06",
+  "where": "Rewe Marburg",
+  "status": 1
+}
+
+
+### create
+POST http://localhost:3000/create
+Content-Type: application/json
+
+{
+"who" : "Constantin",
+"what": "Pommes",
+"date": "2023-01-09",
+"where": "Gießen",
+"status": 1
+}
+
+###create
+POST http://localhost:3000/create
+Content-Type: application/json
+
+{
+"who" : "Fischer",
+"what": "Öl",
+"date": "2023-01-10",
+"where": "Rewe Gießen",
+"status": 1
+}
+
+### read
+GET http://localhost:3000/read
+
+
+### udate
+POST http://localhost:3000/update
+Content-Type: application/json
+
+{
+   "id_act": 6,
+   "who" : "CosCos",
+   "what": "nothing",
+   "date": "2023-01-06",
+   "where": "Rewe Marburg",
+   "status": 1
+}
+
+
+
+### delete
+POST http://localhost:3000/delete
+Content-Type: application/json
+
+{
+  "id_act": 7
+}
