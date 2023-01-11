@@ -14,8 +14,8 @@
 // Globale Variable --------------------------------------------------------------------
 var serviceName;
 var statusCreate = 0; // Status des Eingabemodus: 0 = offen, 1 = eingehen, 2 = ändern
-var username; //aktuelle Bearbeiterperson
-// Debug Information über coonsole.log ausgeben
+var username; //aktuelle Bearbeiter person
+// Debug Information über console.log ausgeben
 var logEvent = true; // Ausgabe der Event-Starts in console.log
 var logEventFull = false; // Ausgabe der vollständigen Events in console.log
 // Funktionen --------------------------------------------------------------------
@@ -28,11 +28,11 @@ function start() {
     request.open('GET', 'version');
     request.send();
     request.onload = function (event) {
-        // Eventhandler das Lesen der aktuellen Tabelle vom Server
+        // Event-handler das Lesen der aktuellen Tabelle vom Server
         if (request.status === 200) { // Erfolgreiche Rückgabe
             serviceName = request.response;
             // Version eintragen
-            document.getElementById("version-title-id ").innerText = serviceName;
+            document.getElementById("version-title-id").innerText = serviceName;
             document.getElementById("version-id").innerText = serviceName;
             console.log(serviceName);
         }
@@ -51,11 +51,44 @@ function basisdaten(event) {
     if (logEvent)
         console.log("Basisdaten: ", username); // Debug
     // Freigabe der LoP-Ausgabe im HTML-Dokument
-    var lop_liste = document.getElementById("einkaufsliste-liste");
-    lop_liste.classList.remove("as-unsichtbar");
-    lop_liste.classList.add("as-sichtbar");
+    var einkaufsliste_liste = document.getElementById("einkaufsliste-liste");
+    einkaufsliste_liste.classList.remove("as-unsichtbar");
+    einkaufsliste_liste.classList.add("as-sichtbar");
     // Lesen der aktuellen Tabelle vom Server und Ausgabe in einkaufsliste-tbody
     renderEinkaufsListe();
+}
+function renderEinkaufsListe() {
+    /*
+    * Ausgabe der aktuellen LoP und Abschluss ausstehender Nutzer-Interaktionen.
+    * Alle Eingabefelder in der LoP-Tabelle werden gelöscht.
+    */
+    var table_body = document.getElementById("einkaufsliste-tbody");
+    var html_EinkaufsListe = "";
+    // XMLHttpRequest aufsetzen und absenden ----------------------------------
+    var request = new XMLHttpRequest();
+    // Request starten
+    request.open('GET', 'read');
+    request.send();
+    request.onload = function (event) {
+        // Event-handler für das Lesen der aktuellen Tabelle vom Server
+        if (request.status === 200) { // Erfolgreiche Rückgabe
+            html_EinkaufsListe = request.response;
+            if (logEventFull)
+                console.log("Ergebnis vom Server: ", html_EinkaufsListe);
+            table_body.innerHTML = html_EinkaufsListe;
+            var einkaufslisteCreateSave = document.getElementById("einkaufsliste-create-save");
+            einkaufslisteCreateSave.classList.remove("as-unsichtbar");
+            einkaufslisteCreateSave.classList.add("as-sichtbar");
+            statusCreate = 0; // Der Status 0 gibt die Bearbeitung aller Events frei.
+            // Die ausgegebene Tabelle im Browser entspricht jetzt dem aktuellen
+            // Stand.
+        }
+        else { // Fehlermeldung vom Server
+            console.log("Fehler bei der Übertragung", request.status);
+            if (logEvent)
+                console.log("Fehler bei der Übertragung", request.status, "\n", event);
+        }
+    };
 }
 function aufgabe(event) {
     /*
@@ -73,16 +106,16 @@ function aufgabe(event) {
             var html = tbody.innerHTML; // aktuellen Tabelleninhalt sichern
             var datumNew = (new Date()).toISOString().slice(0, 10); //aktuelles Datum bestimmen
             // Aufbau und Ausgabe der Eingabefelder für ein neues Element der Einkaufsliste
-            // Die Eingabefelder werden in der ersten Zeile der Tabelle angelegt
+            // die Eingabefelder werden in der ersten Zeile der Tabelle angelegt
             var get_waren = "<tr class='b-dot-line' data-lop-id='" + undefined + "'> " +
                 "<td data-purpose='who' data-lop-id='" + undefined + "'>" +
                 "<input name='who' type='text' data-lop-id='" + undefined +
                 "' value = " + username + ">" +
                 "</td>" +
-                "<td data-purpose='aufgabe' data-lop-id='" + undefined + "'>" +
+                "<td data-purpose='what' data-lop-id='" + undefined + "'>" +
                 " <form>" +
-                "<input name = 'Aufgabe' type = 'text'  " +
-                "placeholder = 'Waren'  class= 'as-width-100pc' data-input ='aufgabe'>" +
+                "<input name = 'what' type = 'text'  " +
+                "placeholder = 'Waren'  class= 'as-width-100pc' data-input ='what'>" +
                 "<br>" +
                 "<input type = 'submit' value = 'speichern' class='as-button-0 button-shadow' " +
                 "data-purpose = 'speichern' data-lop-id = 'undefinded'>" +
@@ -90,13 +123,13 @@ function aufgabe(event) {
                 "data-purpose = 'zurück' data-lop-id = 'undefinded'>" +
                 "</form>" +
                 "</td>" +
-                "<td data-purpose='wo' data-lop-id='" + undefined + "'>" +
-                "<input name = 'wo' type = 'text'  " +
-                "placeholder = 'wo'  class= 'as-width-100pc' data-input ='wo'>" +
+                "<td data-purpose='where' data-lop-id='" + undefined + "'>" +
+                "<input name = 'where' type = 'text'  " +
+                "placeholder = 'where'  class= 'as-width-25pc' data-input ='where'>" +
                 "</td>" +
-                "<td data-purpose='datum' data-lop-id='" + undefined + "'>" +
+                "<td data-purpose='date' data-lop-id='" + undefined + "'>" +
                 "<input  name='Datum' type='text' " +
-                "data-lop-id='" + undefined + "' data-purpose='datum'" +
+                "data-lop-id='" + undefined + "' data-purpose='date'" +
                 "' value = " + datumNew + ">" +
                 "</td>" +
                 "</tr>";
@@ -116,7 +149,7 @@ function aufgabe(event) {
         request_1.open('GET', 'save');
         request_1.send();
         request_1.onload = function (event) {
-            // Eventhandler für das Lesen der aktuellen Tabellenzeile zum Ändern oder Löschen
+            // Event-handler für das Lesen der aktuellen Tabellenzeile zum Ändern oder Löschen
             // vom Server
             if (request_1.status === 200) { // Erfolgreiche Rückgabe
                 if (logEventFull)
@@ -181,16 +214,15 @@ function createUpdateDelete(event) {
                 // Request starten
                 request_2.open('POST', 'create');
                 request_2.setRequestHeader('Content-Type', 'application/json');
-                var json_datei = JSON.stringify(({
+                request_2.send(JSON.stringify({
                     "who": who_aktuell,
                     "what": what_aktuell,
                     "where": where_aktuell,
                     "date": date_aktuell,
                     "status": 1
                 }));
-                request_2.send(json_datei);
                 request_2.onload = function (event) {
-                    // Eventhandler das Lesen der aktuellen Tabelle vom Server
+                    // Event-handler das Lesen der aktuellen Tabelle vom Server
                     if (request_2.status === 200) { // Erfolgreiche Rückgabe
                         renderEinkaufsListe();
                     }
@@ -204,42 +236,63 @@ function createUpdateDelete(event) {
             }
         }
     }
-    else if (command === "who" || command === "what" || command === "where" || command === "date") {
+    else if (command === "who" || command === "what" || command === "where" || command === "date" ||
+        (command == "aendern" && statusCreate == 0)) {
         // Ändern aktivieren ----------------------------------------------------------------------
         // Ausgabe der Eingabefelder für die Änderung (Update) eines LoP-Eintrags
         if (logEvent)
             console.log("function  createUpdateDelete -> who, what,where, date"); // Debug
         if (logEventFull)
             console.log("update: ", event.target.parentElement); // Debug
+        var asbuttoms = document.getElementById("einkaufsliste-tbody");
+        asbuttoms.classList.remove("as-button-1");
+        asbuttoms.classList.add("as-button-2");
         if (statusCreate === 0) {
             statusCreate = 2; // Der Status 2 sperrt die Bearbeitung anderer Events, die nicht zur
             // Bearbeitung der Änderung des LoP-Eintrags gehören
-            var tr_act_1 = event.target.parentElement;
-            var id_act = Number(tr_act_1.getAttribute('data-lop-id'));
+            // Bearbeitung der Änderung des LoP-Eintrags gehören
+            var mod = void 0;
+            var tr_act_1;
+            var id_act = void 0;
+            if (command != "aendern") {
+                tr_act_1 = event.target.parentElement;
+                id_act = Number(tr_act_1.getAttribute('data-lop-id'));
+                mod = 'read';
+            }
+            else {
+                tr_act_1 = event.target.parentElement.parentElement;
+                id_act = Number(tr_act_1.getAttribute('data-lop-id'));
+                var request_3 = new XMLHttpRequest();
+                request_3.open('POST', 'change');
+                request_3.setRequestHeader('Content-Type', 'application/json');
+                request_3.send(JSON.stringify({
+                    "id_act": id_act
+                }));
+                mod = 'change';
+            }
             if (logEventFull)
                 console.log("id_act: ", id_act); // Debug
             // XMLHttpRequest aufsetzen und absenden
-            var request_3 = new XMLHttpRequest();
+            var request_4 = new XMLHttpRequest();
             // Request starten
-            request_3.open('POST', 'read');
-            request_3.setRequestHeader('Content-Type', 'application/json');
-            var json_datei = JSON.stringify(({
+            request_4.open('POST', mod);
+            request_4.setRequestHeader('Content-Type', 'application/json');
+            request_4.send(JSON.stringify({
                 "id_act": id_act
             }));
-            request_3.send(json_datei);
-            request_3.onload = function (event) {
-                // Eventhandler für das Lesen der aktuellen Tabellenzeile zum Ändern oder Löschen
+            request_4.onload = function (event) {
+                // Event-handler für das Lesen der aktuellen Tabellenzeile zum Ändern oder Löschen
                 // vom Server
-                if (request_3.status === 200) { // Erfolgreiche Rückgabe
-                    var html_Change = request_3.response;
+                if (request_4.status === 200) { // Erfolgreiche Rückgabe
+                    var html_Change = request_4.response;
                     if (logEventFull)
                         console.log("Ergebnis vom Server: ", html_Change);
                     tr_act_1.innerHTML = html_Change;
                 }
                 else { // Fehlermeldung vom Server
-                    console.log("Fehler bei der Übertragung", request_3.status);
+                    console.log("Fehler bei der Übertragung", request_4.status);
                     if (logEvent)
-                        console.log("Fehler bei der Übertragung", request_3.status, "\n", event);
+                        console.log("Fehler bei der Übertragung", request_4.status, "\n", event);
                 }
             };
         }
@@ -257,64 +310,19 @@ function createUpdateDelete(event) {
             // aktuelles Element ermitteln
             var id_act = Number(event.target.getAttribute('data-lop-id'));
             // XMLHttpRequest aufsetzen und absenden
-            var request_4 = new XMLHttpRequest();
-            // Request starten
-            request_4.open('POST', 'delete');
-            request_4.setRequestHeader('Content-Type', 'application/json');
-            var json_datei = JSON.stringify(({
-                "id_act": id_act
-            }));
-            request_4.send(json_datei);
-            request_4.onload = function (event) {
-                // Eventhandler für das Lesen der aktuellen Tabellenzeile zum Ändern oder Löschen
-                // vom Server
-                if (request_4.status === 200) { // Erfolgreiche Rückgabe
-                    if (logEventFull)
-                        console.log("Gelöscht: ");
-                    renderEinkaufsListe();
-                }
-                else { // Fehlermeldung vom Server
-                    console.log("Fehler bei der Übertragung", request_4.status);
-                    if (logEvent)
-                        console.log("Fehler bei der Übertragung", request_4.status, "\n", event);
-                }
-            };
-        }
-    }
-    else if (command === "aendern") {
-        // ändern ---------------------------------------------------------------------------------
-        if (statusCreate === 2) {
-            // Das aktuelle Element der LoP wird entsprechend der Nutzereingabe geändert
-            if (logEvent)
-                console.log("function  createUpdateDelete -> ändern"); // Debug
-            if (logEventFull)
-                console.log("ändern: ", event.target); // Debug
-            // Geänderte Daten aus HTML-Dokument übernehmen
-            var td_actual = event.target.parentElement.parentElement;
-            var what_aktuell = td_actual.childNodes[0].value;
-            var where_aktuell = td_actual.nextSibling.childNodes[0].value;
-            var who_aktuell = td_actual.previousSibling.childNodes[0].value;
-            var date_aktuell = td_actual.nextSibling.nextSibling.childNodes[0].value;
-            if (logEvent)
-                console.log("ändern: ", who_aktuell, what_aktuell, where_aktuell, date_aktuell); // Debug
-            // aktuelles Element ermitteln
-            var id_act = Number(event.target.getAttribute('data-lop-id'));
-            // XMLHttpRequest aufsetzen und absenden
             var request_5 = new XMLHttpRequest();
             // Request starten
-            request_5.open('POST', 'update');
+            request_5.open('POST', 'delete');
             request_5.setRequestHeader('Content-Type', 'application/json');
-            var json_datei = JSON.stringify(({
-                "who": who_aktuell,
-                "what": what_aktuell,
-                "where": where_aktuell,
-                "date": date_aktuell,
-                "status": 1
+            request_5.send(JSON.stringify({
+                "id_act": id_act
             }));
-            request_5.send(json_datei);
             request_5.onload = function (event) {
-                // Eventhandler das Lesen der aktuellen Tabelle vom Server
+                // Event-handler für das Lesen der aktuellen Tabellenzeile zum Ändern oder Löschen
+                // vom Server
                 if (request_5.status === 200) { // Erfolgreiche Rückgabe
+                    if (logEventFull)
+                        console.log("Gelöscht: ");
                     renderEinkaufsListe();
                 }
                 else { // Fehlermeldung vom Server
@@ -325,49 +333,62 @@ function createUpdateDelete(event) {
             };
         }
     }
+    else if (command === "speichern2" || command === "aendern") {
+        // ändern ---------------------------------------------------------------------------------
+        if (statusCreate === 2) {
+            // Das aktuelle Element der LoP wird entsprechend der Nutzereingabe geändert
+            if (logEvent)
+                console.log("function  createUpdateDelete -> ändern"); // Debug
+            if (logEventFull)
+                console.log("ändern: ", event.target); // Debug
+            // aktuelles Element ermitteln
+            var id_act = Number(event.target.getAttribute('data-lop-id'));
+            // XMLHttpRequest aufsetzen und absenden
+            var request_6 = new XMLHttpRequest();
+            // Geänderte Daten aus HTML-Dokument übernehmen
+            var td_actual = event.target.parentElement.parentElement;
+            var what_aktuell = td_actual.childNodes[0].value;
+            var where_aktuell = td_actual.nextSibling.childNodes[0].value;
+            var who_aktuell = td_actual.previousSibling.childNodes[0].value;
+            var date_aktuell = td_actual.nextSibling.nextSibling.childNodes[0].value;
+            if (logEvent)
+                console.log("ändern: ", who_aktuell, what_aktuell, where_aktuell, date_aktuell); // Debug
+            // Request starten
+            request_6.open('POST', 'update');
+            request_6.setRequestHeader('Content-Type', 'application/json');
+            request_6.send(JSON.stringify({
+                "id_act": id_act,
+                "who": who_aktuell,
+                "what": what_aktuell,
+                "where": where_aktuell,
+                "date": date_aktuell,
+                "status": 1
+            }));
+            request_6.onload = function (event) {
+                // Event-handler das Lesen der aktuellen Tabelle vom Server
+                if (request_6.status === 200) { // Erfolgreiche Rückgabe
+                    renderEinkaufsListe();
+                }
+                else { // Fehlermeldung vom Server
+                    console.log("Fehler bei der Übertragung", request_6.status);
+                    if (logEvent)
+                        console.log("Fehler bei der Übertragung", request_6.status, "\n", event);
+                }
+            };
+        }
+    }
     else {
         // Clicks ins Nirgendwo -------------------------------------------------------------------
         if (logEvent)
             console.log("function  createUpdateDelete -> ?"); // Debug
     }
 }
-function renderEinkaufsListe() {
-    /*
-    * Ausgabe der aktuellen LoP und Abschluss ausstehender Nutzer-Interaktionen.
-    * Alle Eingabefelder in der LoP-Tabelle werden gelöscht.
-    */
-    var table_body = document.getElementById("einkaufsliste-tbody");
-    var html_LoP = "";
-    // XMLHttpRequest aufsetzen und absenden ----------------------------------
-    var request = new XMLHttpRequest();
-    // Request starten
-    request.open('GET', 'read');
-    request.send();
-    request.onload = function (event) {
-        // Eventhandler für das Lesen der aktuellen Tabelle vom Server
-        if (request.status === 200) { // Erfolgreiche Rückgabe
-            html_LoP = request.response;
-            if (logEventFull)
-                console.log("Ergebnis vom Server: ", html_LoP);
-            table_body.innerHTML = html_LoP;
-            var einkaufslisteCreateSave = document.getElementById("einkaufsliste-create-save");
-            einkaufslisteCreateSave.classList.remove("as-unsichtbar");
-            einkaufslisteCreateSave.classList.add("as-sichtbar");
-            statusCreate = 0; // Der Status 0 gibt die Bearbeitung aller Events frei.
-            // Die ausgegebene Tabelle im Browser entspricht jetzt dem aktuellen
-            // Stand.
-        }
-        else { // Fehlermeldung vom Server
-            console.log("Fehler bei der Übertragung", request.status);
-            if (logEvent)
-                console.log("Fehler bei der Übertragung", request.status, "\n", event);
-        }
-    };
-}
+//-----------------------------------------------------------------------------------------
+// Event Listener
 document.addEventListener("DOMContentLoaded", function () {
     start();
     document.getElementById("eingabe-basisdaten").addEventListener("submit", function (event) {
-        /* Nach der Eingabe des Bearbeiternamens wird die Tabelle aufgebaut
+        /* Nach der Eingabe des Bearbeiternamen wird die Tabelle aufgebaut
          */
         if (logEvent)
             console.log("eingabe-basisdaten; submit"); // Debug
@@ -375,8 +396,8 @@ document.addEventListener("DOMContentLoaded", function () {
     });
     document.getElementById("einkaufsliste-create-save").addEventListener("submit", function (event) {
         /* Callback für die Buttons
-           - "neu" -> neuen Eintrag für die LoP abfragen
-           - "sichern" -> aktuelle LoP auf dem Server sichern
+           - "neu" → neuen Eintrag für die LoP abfragen
+           - "sichern" → aktuelle LoP auf dem Server sichern
          */
         if (logEvent)
             console.log("einkaufsliste-create-save; submit"); // Debug
@@ -386,10 +407,10 @@ document.addEventListener("DOMContentLoaded", function () {
     });
     document.getElementById("einkaufsliste-tbody").addEventListener("click", function (event) {
         /* Callback für die Buttons
-           - "speichern" -> Erzeugen eines neuen Eintrags in der LoP anhand der Eingabedaten (CREATE)
-           - "zurück" -> abbrechen der aktiven Aktion
-           - "ändern" -> ändern eines ausgewählten Eintrags in der LoP anhand der Eingabedaten (UPDATE)
-           - "löschen" -> löschen eines ausgewählten Eintrags (DELETE)
+           - "speichern" → Erzeugen eines neuen Eintrags in der LoP anhand der Eingabedaten (CREATE)
+           - "zurück" → abbrechen der aktiven Aktion
+           - "ändern" → ändern eines ausgewählten Eintrags in der LoP anhand der Eingabedaten (UPDATE)
+           - "löschen" → löschen eines ausgewählten Eintrags (DELETE)
          */
         event.preventDefault();
         if (logEvent)

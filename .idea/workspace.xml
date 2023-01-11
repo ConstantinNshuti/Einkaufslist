@@ -1,22 +1,24 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="63ea5b3d-8383-4f5b-819e-872d79fd83bf" name="Changes" comment="Initial commit">
-      <change afterPath="$PROJECT_DIR$/.idea/httpRequests/2023-01-03T215534.200.icon" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/httpRequests/2023-01-04T195438.200.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/httpRequests/2023-01-04T195818.200.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/httpRequests/2023-01-09T110752.200.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/httpRequests/2023-01-09T135445.200.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/images/cart.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/log/logEinkaufsListe.json" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/log/logEinkaufsListe_2023-01-09T10:07:31.418Z.json" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/script/EinkaufsListe.ts" afterDir="false" />
+    <list default="true" id="63ea5b3d-8383-4f5b-819e-872d79fd83bf" name="Changes" comment="Server Complete">
+      <change afterPath="$PROJECT_DIR$/.idea/httpRequests/2023-01-11T015559.200.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/log/logEinkaufsListe_2023-01-10T13:15:17.090Z.json" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/log/logEinkaufsListe_2023-01-10T20:03:15.930Z.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/httpRequests/2023-01-03T215534.200.icon" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/httpRequests/2023-01-04T195438.200.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/httpRequests/2023-01-04T195818.200.png" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/einkauf_server.js" beforeDir="false" afterPath="$PROJECT_DIR$/einkauf_server.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/einkauf_server.ts" beforeDir="false" afterPath="$PROJECT_DIR$/einkauf_server.ts" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/html/einkaufslist.html" beforeDir="false" afterPath="$PROJECT_DIR$/html/einkaufslist.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/script/einkaufslist.js" beforeDir="false" afterPath="$PROJECT_DIR$/http/einkaufsListe.http" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/script/einkaufslist.ts" beforeDir="false" afterPath="$PROJECT_DIR$/script/EinkaufsListe.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/http/einkaufsListe.http" beforeDir="false" afterPath="$PROJECT_DIR$/http/einkaufsListe.http" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/log/logEinkaufsListe.json" beforeDir="false" afterPath="$PROJECT_DIR$/log/logEinkaufsListe.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/log/logEinkaufsListe_2023-01-09T10:07:31.418Z.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/package-lock.json" beforeDir="false" afterPath="$PROJECT_DIR$/package-lock.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/package.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/script/EinkaufsListe.js" beforeDir="false" afterPath="$PROJECT_DIR$/script/EinkaufsListe.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/script/EinkaufsListe.ts" beforeDir="false" afterPath="$PROJECT_DIR$/script/EinkaufsListe.ts" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/styles/einkaufslist.css" beforeDir="false" afterPath="$PROJECT_DIR$/styles/einkaufslist.css" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -73,29 +75,29 @@
       <recent name="$PROJECT_DIR$/images" />
     </key>
   </component>
-  <component name="RunManager" selected="HTTP Request.einkaufsListe | read">
+  <component name="RunManager" selected="Node.js.EinkaufsListe.js">
+    <configuration name="einkaufsListe | create#2" type="HttpClient.HttpRequestRunConfigurationType" factoryName="HTTP Request" temporary="true" nameIsGenerated="true" path="$PROJECT_DIR$/http/einkaufsListe.http" index="6" requestIdentifier="create#2" runType="Run single request">
+      <method v="2" />
+    </configuration>
     <configuration name="einkaufsListe | create#3" type="HttpClient.HttpRequestRunConfigurationType" factoryName="HTTP Request" temporary="true" nameIsGenerated="true" path="$PROJECT_DIR$/http/einkaufsListe.http" index="7" requestIdentifier="create#3" runType="Run single request">
       <method v="2" />
     </configuration>
-    <configuration name="einkaufsListe | delete" type="HttpClient.HttpRequestRunConfigurationType" factoryName="HTTP Request" temporary="true" nameIsGenerated="true" path="$PROJECT_DIR$/http/einkaufsListe.http" index="9" requestIdentifier="delete" runType="Run single request">
+    <configuration name="einkaufsListe | create#4" type="HttpClient.HttpRequestRunConfigurationType" factoryName="HTTP Request" temporary="true" nameIsGenerated="true" path="$PROJECT_DIR$/http/einkaufsListe.http" index="8" requestIdentifier="create#4" runType="Run single request">
       <method v="2" />
     </configuration>
-    <configuration name="einkaufsListe | read" type="HttpClient.HttpRequestRunConfigurationType" factoryName="HTTP Request" temporary="true" nameIsGenerated="true" path="$PROJECT_DIR$/http/einkaufsListe.http" index="8" requestIdentifier="read" runType="Run single request">
+    <configuration name="einkaufsListe | favicon" type="HttpClient.HttpRequestRunConfigurationType" factoryName="HTTP Request" temporary="true" nameIsGenerated="true" path="$PROJECT_DIR$/http/einkaufsListe.http" index="3" requestIdentifier="favicon" runType="Run single request">
       <method v="2" />
     </configuration>
-    <configuration name="einkaufsListe | udate" type="HttpClient.HttpRequestRunConfigurationType" factoryName="HTTP Request" temporary="true" nameIsGenerated="true" path="$PROJECT_DIR$/http/einkaufsListe.http" index="9" requestIdentifier="udate" runType="Run single request">
-      <method v="2" />
-    </configuration>
-    <configuration name="einkaufsListe | version" type="HttpClient.HttpRequestRunConfigurationType" factoryName="HTTP Request" temporary="true" nameIsGenerated="true" path="$PROJECT_DIR$/http/einkaufsListe.http" index="2" requestIdentifier="version" runType="Run single request">
+    <configuration name="EinkaufsListe.js" type="NodeJSConfigurationType" temporary="true" nameIsGenerated="true" path-to-js-file="$PROJECT_DIR$/script/EinkaufsListe.js" working-dir="$PROJECT_DIR$/script">
       <method v="2" />
     </configuration>
     <recent_temporary>
       <list>
-        <item itemvalue="HTTP Request.einkaufsListe | read" />
-        <item itemvalue="HTTP Request.einkaufsListe | udate" />
-        <item itemvalue="HTTP Request.einkaufsListe | delete" />
+        <item itemvalue="Node.js.EinkaufsListe.js" />
+        <item itemvalue="HTTP Request.einkaufsListe | favicon" />
+        <item itemvalue="HTTP Request.einkaufsListe | create#4" />
         <item itemvalue="HTTP Request.einkaufsListe | create#3" />
-        <item itemvalue="HTTP Request.einkaufsListe | version" />
+        <item itemvalue="HTTP Request.einkaufsListe | create#2" />
       </list>
     </recent_temporary>
   </component>
@@ -108,7 +110,7 @@
       <option name="presentableId" value="Default" />
       <updated>1672237735317</updated>
       <workItem from="1672237736552" duration="367000" />
-      <workItem from="1672238127104" duration="102901000" />
+      <workItem from="1672238127104" duration="128816000" />
     </task>
     <task id="LOCAL-00001" summary="Add">
       <created>1672237851173</created>
@@ -124,7 +126,14 @@
       <option name="project" value="LOCAL" />
       <updated>1672704414927</updated>
     </task>
-    <option name="localTasksCounter" value="3" />
+    <task id="LOCAL-00003" summary="Server Complete">
+      <created>1673352845473</created>
+      <option name="number" value="00003" />
+      <option name="presentableId" value="LOCAL-00003" />
+      <option name="project" value="LOCAL" />
+      <updated>1673352845473</updated>
+    </task>
+    <option name="localTasksCounter" value="4" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -150,6 +159,7 @@
     <option name="ADD_EXTERNAL_FILES_SILENTLY" value="true" />
     <MESSAGE value="Add" />
     <MESSAGE value="Initial commit" />
-    <option name="LAST_COMMIT_MESSAGE" value="Initial commit" />
+    <MESSAGE value="Server Complete" />
+    <option name="LAST_COMMIT_MESSAGE" value="Server Complete" />
   </component>
 </project>

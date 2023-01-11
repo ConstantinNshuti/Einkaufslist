@@ -154,13 +154,42 @@ function renderEinkaufsListe(EinkaufsListe: EinkaufsListe): string{
 
             html_EinkaufsListe += "<td class='click-value' data-purpose='date'" +
                 " data-lop-id='" + id + "'>" + date_string + "</td>";
-
+            html_EinkaufsListe += "<td >"  +
+                "<input  type = 'submit' value = 'E' class='as-button-1' " +
+                "data-purpose = 'aendern' data-lop-id = '" + id + "'>" +
+                "<input  type = 'submit' value = 'X' class='as-button-1' " +
+                "data-purpose = 'loeschen' data-lop-id = '" + id + "'>" +
+                "</td>";
             html_EinkaufsListe += "</tr>"
         }
     }
     return html_EinkaufsListe;
 }
 
+function  change(einkaufChange : EinkaufsListeEintrag) : string {
+
+    let id_act = einkaufChange.getID();
+    let who = einkaufChange.who;
+    let what = einkaufChange.what;
+    let where = einkaufChange.where;
+    let date = einkaufChange.date;
+    let html_Change: string = "";
+    html_Change += "<td><input type='text' value='" + who + "'></td>" +
+        "<td><input class='as-width-100pc' type='text' value='" +
+        what + "'>" +
+        " <form>" +
+        "<input type = 'submit' value = 'speichern' class='as-button-0' " +
+        "data-purpose = 'speichern2' data-lop-id = '" + id_act + "'>" +
+        "<input type = 'submit' value = 'zurück' class='as-button' " +
+        "data-purpose = 'zurück' data-lop-id = '" + id_act + "'>" +
+        "</form>" +
+        "<td><input type='text' value='" + where + "'></td>" +
+        "<br>" +
+        "</td>" +
+        "<td><input type='text' value='" + date.toISOString().slice(0, 10) + "'>" +
+        "</td>";
+    return html_Change;
+}
 function renderEinkaufsListeChange(einkaufslisteChange: EinkaufsListeEintrag): string {
     // Aufbereitung des aktuellen Eintrags für die Änderung-/Löschausgabe in
     // der zugehörigen Tabellenzeile
@@ -184,8 +213,9 @@ function renderEinkaufsListeChange(einkaufslisteChange: EinkaufsListeEintrag): s
         "<input type = 'submit' value = 'löschen' class='as-button' " +
         "data-purpose = 'loeschen' data-lop-id = '" + id_act + "'>" +
         "</form>" +
-        "</td>" +
         "<td><input type='text' value='" + where + "'></td>" +
+        "<br>" +
+        "</td>" +
         "<td><input type='text' value='" + date.toISOString().slice(0, 10) + "'>" +
         "</td>";
 
@@ -359,6 +389,27 @@ myServer.post("/read",(request: express.Request, response: express.Response) => 
         response.status(200);
         response.send(html_change);
     }
+
+});
+
+// change - Einkauf-Eintrag ändern
+myServer.post("/change" , (request: express.Request , response : express.Response) =>{
+    ++einkaufsListeRunCounter;
+    const id_act: number = Number(request.body.id_act);
+    const einkaufslisteChange = einkaufsListe_aktuell.getEinkaufsListeEintrag(id_act);
+    if (logRequest) console.log("Post /read: ", einkaufsListe_aktuell, id_act, einkaufslisteChange);
+
+    if (einkaufsListe_aktuell === undefined || einkaufslisteChange.getStatus() !== 1) {
+        response.status(404)
+        response.send("Item " + id_act + " does not exist");
+
+    } else {
+        // Rendern der aktuellen LoP
+        const html_change = change(einkaufslisteChange);
+        response.status(200);
+        response.send(html_change);
+    }
+
 
 });
 

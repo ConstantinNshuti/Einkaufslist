@@ -15,9 +15,9 @@
 // Globale Variable --------------------------------------------------------------------
 let serviceName: string;
 let statusCreate: number = 0; // Status des Eingabemodus: 0 = offen, 1 = eingehen, 2 = ändern
-let username: string; //aktuelle Bearbeiterperson
+let username: string; //aktuelle Bearbeiter person
 
-// Debug Information über coonsole.log ausgeben
+// Debug Information über console.log ausgeben
 let logEvent: boolean = true; // Ausgabe der Event-Starts in console.log
 let logEventFull: boolean = false; // Ausgabe der vollständigen Events in console.log
 
@@ -34,12 +34,12 @@ function start(){
     request.send();
 
     request.onload = (event) => {
-        // Eventhandler das Lesen der aktuellen Tabelle vom Server
+        // Event-handler das Lesen der aktuellen Tabelle vom Server
         if (request.status === 200){ // Erfolgreiche Rückgabe
 
             serviceName = request.response;
             // Version eintragen
-            document.getElementById("version-title-id ").innerText = serviceName;
+            document.getElementById("version-title-id").innerText = serviceName;
             document.getElementById("version-id").innerText = serviceName;
             console.log(serviceName);
 
@@ -61,13 +61,55 @@ function basisdaten(event) {
     if (logEvent) console.log("Basisdaten: ", username); // Debug
 
     // Freigabe der LoP-Ausgabe im HTML-Dokument
-    const lop_liste = document.getElementById("einkaufsliste-liste") as HTMLElement;
-    lop_liste.classList.remove("as-unsichtbar");
-    lop_liste.classList.add("as-sichtbar");
+    const einkaufsliste_liste = document.getElementById("einkaufsliste-liste") as HTMLElement;
+    einkaufsliste_liste.classList.remove("as-unsichtbar");
+    einkaufsliste_liste.classList.add("as-sichtbar");
 
     // Lesen der aktuellen Tabelle vom Server und Ausgabe in einkaufsliste-tbody
     renderEinkaufsListe();
 }
+
+
+
+function renderEinkaufsListe () {
+    /*
+    * Ausgabe der aktuellen LoP und Abschluss ausstehender Nutzer-Interaktionen.
+    * Alle Eingabefelder in der LoP-Tabelle werden gelöscht.
+    */
+    const table_body = document.getElementById("einkaufsliste-tbody") as HTMLElement;
+    let html_EinkaufsListe: string = "";
+
+    // XMLHttpRequest aufsetzen und absenden ----------------------------------
+    const request = new XMLHttpRequest();
+
+    // Request starten
+    request.open('GET', 'read');
+    request.send();
+
+    request.onload = (event) => {
+        // Event-handler für das Lesen der aktuellen Tabelle vom Server
+        if (request.status === 200) { // Erfolgreiche Rückgabe
+            html_EinkaufsListe = request.response;
+            if (logEventFull) console.log("Ergebnis vom Server: ", html_EinkaufsListe);
+
+            table_body.innerHTML = html_EinkaufsListe;
+
+            const einkaufslisteCreateSave = document.getElementById("einkaufsliste-create-save") as HTMLElement;
+            einkaufslisteCreateSave.classList.remove("as-unsichtbar");
+            einkaufslisteCreateSave.classList.add("as-sichtbar");
+
+            statusCreate = 0;  // Der Status 0 gibt die Bearbeitung aller Events frei.
+                               // Die ausgegebene Tabelle im Browser entspricht jetzt dem aktuellen
+                               // Stand.
+
+        } else { // Fehlermeldung vom Server
+            console.log("Fehler bei der Übertragung", request.status);
+            if (logEvent) console.log("Fehler bei der Übertragung", request.status,
+                "\n", event);
+        }
+    };
+}
+
 
 
 function aufgabe(event) {
@@ -88,17 +130,17 @@ function aufgabe(event) {
             const datumNew = (new Date()).toISOString().slice(0, 10); //aktuelles Datum bestimmen
 
             // Aufbau und Ausgabe der Eingabefelder für ein neues Element der Einkaufsliste
-            // Die Eingabefelder werden in der ersten Zeile der Tabelle angelegt
+            // die Eingabefelder werden in der ersten Zeile der Tabelle angelegt
             const get_waren: string =
                 "<tr class='b-dot-line' data-lop-id='" + undefined + "'> " +
                 "<td data-purpose='who' data-lop-id='" + undefined + "'>" +
                 "<input name='who' type='text' data-lop-id='" + undefined +
                 "' value = " + username + ">" +
                 "</td>" +
-                "<td data-purpose='aufgabe' data-lop-id='" + undefined + "'>" +
+                "<td data-purpose='what' data-lop-id='" + undefined + "'>" +
                 " <form>" +
-                "<input name = 'Aufgabe' type = 'text'  " +
-                "placeholder = 'Waren'  class= 'as-width-100pc' data-input ='aufgabe'>" +
+                "<input name = 'what' type = 'text'  " +
+                "placeholder = 'Waren'  class= 'as-width-100pc' data-input ='what'>" +
                 "<br>" +
                 "<input type = 'submit' value = 'speichern' class='as-button-0 button-shadow' " +
                 "data-purpose = 'speichern' data-lop-id = 'undefinded'>" +
@@ -106,13 +148,13 @@ function aufgabe(event) {
                 "data-purpose = 'zurück' data-lop-id = 'undefinded'>" +
                 "</form>" +
                 "</td>" +
-                "<td data-purpose='wo' data-lop-id='" + undefined + "'>" +
-                "<input name = 'wo' type = 'text'  " +
-                "placeholder = 'wo'  class= 'as-width-100pc' data-input ='wo'>" +
+                "<td data-purpose='where' data-lop-id='" + undefined + "'>" +
+                "<input name = 'where' type = 'text'  " +
+                "placeholder = 'where'  class= 'as-width-25pc' data-input ='where'>" +
                 "</td>" +
-                "<td data-purpose='datum' data-lop-id='" + undefined + "'>" +
+                "<td data-purpose='date' data-lop-id='" + undefined + "'>" +
                 "<input  name='Datum' type='text' " +
-                "data-lop-id='" + undefined + "' data-purpose='datum'" +
+                "data-lop-id='" + undefined + "' data-purpose='date'" +
                 "' value = " + datumNew + ">" +
                 "</td>" +
                 "</tr>";
@@ -134,7 +176,7 @@ function aufgabe(event) {
         request.send()
 
         request.onload = (event) => {
-            // Eventhandler für das Lesen der aktuellen Tabellenzeile zum Ändern oder Löschen
+            // Event-handler für das Lesen der aktuellen Tabellenzeile zum Ändern oder Löschen
             // vom Server
             if (request.status === 200) { // Erfolgreiche Rückgabe
                 if (logEventFull) console.log("Daten gesichert",);
@@ -207,18 +249,19 @@ function createUpdateDelete(event) {
                 // Request starten
                 request.open('POST', 'create');
                 request.setRequestHeader('Content-Type', 'application/json');
-                const json_datei = JSON.stringify((
+
+                request.send(JSON.stringify(
                     {
                         "who": who_aktuell,
                         "what": what_aktuell,
                         "where": where_aktuell,
                         "date": date_aktuell,
                         "status": 1
-                    }));
-                request.send(json_datei);
+                    })
+                );
 
                 request.onload = (event) => {
-                    // Eventhandler das Lesen der aktuellen Tabelle vom Server
+                    // Event-handler das Lesen der aktuellen Tabelle vom Server
                     if (request.status === 200) { // Erfolgreiche Rückgabe
                         renderEinkaufsListe();
 
@@ -232,37 +275,59 @@ function createUpdateDelete(event) {
                 renderEinkaufsListe();
             }
         }
-    } else if (command === "who" || command === "what" || command === "where" || command === "date") {
+    } else if (command === "who" || command === "what" || command === "where" || command === "date" ||
+        (command == "aendern" && statusCreate == 0 )) {
         // Ändern aktivieren ----------------------------------------------------------------------
         // Ausgabe der Eingabefelder für die Änderung (Update) eines LoP-Eintrags
         if (logEvent) console.log("function  createUpdateDelete -> who, what,where, date"); // Debug
         if (logEventFull) console.log("update: ", event.target.parentElement); // Debug
 
+        const asbuttoms = document.getElementById("einkaufsliste-tbody")as HTMLElement;
+        asbuttoms.classList.remove("as-button-1");
+        asbuttoms.classList.add("as-button-2");
+
         if (statusCreate === 0) {
             statusCreate = 2; // Der Status 2 sperrt die Bearbeitung anderer Events, die nicht zur
                               // Bearbeitung der Änderung des LoP-Eintrags gehören
 
-            const tr_act = event.target.parentElement;
-            const id_act = Number(tr_act.getAttribute('data-lop-id'));
+            // Bearbeitung der Änderung des LoP-Eintrags gehören
+            let mod;
+            let tr_act;
+            let id_act
+            if(command != "aendern") {
+                 tr_act = event.target.parentElement;
+                 id_act = Number(tr_act.getAttribute('data-lop-id'));
+                mod = 'read'
+            }else {
+                tr_act = event.target.parentElement.parentElement;
+                id_act = Number( tr_act.getAttribute( 'data-lop-id' ) );
+                const request = new XMLHttpRequest();
+                request.open('POST', 'change');
+                request.setRequestHeader('Content-Type', 'application/json');
+                request.send( JSON.stringify(
+                    {
+                        "id_act": id_act
+                    } )
+                );
+                mod ='change'
 
+            }
             if (logEventFull) console.log("id_act: ", id_act); // Debug
 
             // XMLHttpRequest aufsetzen und absenden
             const request = new XMLHttpRequest();
 
             // Request starten
-            request.open('POST', 'read');
+            request.open('POST', mod);
             request.setRequestHeader('Content-Type', 'application/json');
-
-            const json_datei = JSON.stringify((
+            request.send( JSON.stringify(
                 {
                     "id_act": id_act
-
-                }));
-            request.send(json_datei);
+                } )
+            );
 
             request.onload = (event) => {
-                // Eventhandler für das Lesen der aktuellen Tabellenzeile zum Ändern oder Löschen
+                // Event-handler für das Lesen der aktuellen Tabellenzeile zum Ändern oder Löschen
                 // vom Server
                 if (request.status === 200) { // Erfolgreiche Rückgabe
 
@@ -296,15 +361,14 @@ function createUpdateDelete(event) {
             // Request starten
             request.open('POST', 'delete');
             request.setRequestHeader('Content-Type', 'application/json');
-            const json_datei = JSON.stringify((
+            request.send(JSON.stringify(
                 {
                     "id_act": id_act
-
-                }));
-            request.send(json_datei);
+                })
+            );
 
             request.onload = (event) => {
-                // Eventhandler für das Lesen der aktuellen Tabellenzeile zum Ändern oder Löschen
+                // Event-handler für das Lesen der aktuellen Tabellenzeile zum Ändern oder Löschen
                 // vom Server
                 if (request.status === 200) { // Erfolgreiche Rückgabe
 
@@ -318,13 +382,19 @@ function createUpdateDelete(event) {
                 }
             };
         }
-    } else if (command === "aendern") {
+    } else if (command === "speichern2" || command === "aendern") {
         // ändern ---------------------------------------------------------------------------------
         if (statusCreate === 2) {
             // Das aktuelle Element der LoP wird entsprechend der Nutzereingabe geändert
 
             if (logEvent) console.log("function  createUpdateDelete -> ändern"); // Debug
             if (logEventFull) console.log("ändern: ", event.target); // Debug
+
+            // aktuelles Element ermitteln
+            const id_act = Number(event.target.getAttribute('data-lop-id'));
+
+            // XMLHttpRequest aufsetzen und absenden
+            const request = new XMLHttpRequest();
 
             // Geänderte Daten aus HTML-Dokument übernehmen
             const td_actual = event.target.parentElement.parentElement;
@@ -335,27 +405,24 @@ function createUpdateDelete(event) {
 
             if (logEvent) console.log("ändern: ", who_aktuell, what_aktuell,where_aktuell, date_aktuell); // Debug
 
-            // aktuelles Element ermitteln
-            const id_act = Number(event.target.getAttribute('data-lop-id'));
-
-            // XMLHttpRequest aufsetzen und absenden
-            const request = new XMLHttpRequest();
 
             // Request starten
             request.open('POST', 'update');
             request.setRequestHeader('Content-Type', 'application/json');
-            const json_datei = JSON.stringify((
+
+            request.send(JSON.stringify(
                 {
+                    "id_act": id_act,
                     "who": who_aktuell,
                     "what": what_aktuell,
                     "where": where_aktuell,
                     "date": date_aktuell,
                     "status": 1
-                }));
-            request.send(json_datei);
+                })
+            );
 
             request.onload = (event) => {
-                // Eventhandler das Lesen der aktuellen Tabelle vom Server
+                // Event-handler das Lesen der aktuellen Tabelle vom Server
                 if (request.status === 200) { // Erfolgreiche Rückgabe
                     renderEinkaufsListe();
 
@@ -372,53 +439,15 @@ function createUpdateDelete(event) {
     }
 }
 
-
-function renderEinkaufsListe () {
-    /*
-    * Ausgabe der aktuellen LoP und Abschluss ausstehender Nutzer-Interaktionen.
-    * Alle Eingabefelder in der LoP-Tabelle werden gelöscht.
-    */
-    const table_body = document.getElementById("einkaufsliste-tbody") as HTMLElement;
-    let html_LoP: string = "";
-
-    // XMLHttpRequest aufsetzen und absenden ----------------------------------
-    const request = new XMLHttpRequest();
-
-    // Request starten
-    request.open('GET', 'read');
-    request.send();
-
-    request.onload = (event) => {
-        // Eventhandler für das Lesen der aktuellen Tabelle vom Server
-        if (request.status === 200) { // Erfolgreiche Rückgabe
-            html_LoP = request.response;
-            if (logEventFull) console.log("Ergebnis vom Server: ", html_LoP);
-
-            table_body.innerHTML = html_LoP;
-
-            const einkaufslisteCreateSave = document.getElementById("einkaufsliste-create-save") as HTMLElement;
-            einkaufslisteCreateSave.classList.remove("as-unsichtbar");
-            einkaufslisteCreateSave.classList.add("as-sichtbar");
-
-            statusCreate = 0;  // Der Status 0 gibt die Bearbeitung aller Events frei.
-                               // Die ausgegebene Tabelle im Browser entspricht jetzt dem aktuellen
-                               // Stand.
-
-        } else { // Fehlermeldung vom Server
-            console.log("Fehler bei der Übertragung", request.status);
-            if (logEvent) console.log("Fehler bei der Übertragung", request.status,
-                "\n", event);
-        }
-    };
-}
-
+//-----------------------------------------------------------------------------------------
+// Event Listener
 
 document.addEventListener("DOMContentLoaded", () =>{
 
     start();
 
     document.getElementById("eingabe-basisdaten").addEventListener("submit", (event) => {
-        /* Nach der Eingabe des Bearbeiternamens wird die Tabelle aufgebaut
+        /* Nach der Eingabe des Bearbeiternamen wird die Tabelle aufgebaut
          */
         if (logEvent) console.log("eingabe-basisdaten; submit"); // Debug
         basisdaten(event);
@@ -427,8 +456,8 @@ document.addEventListener("DOMContentLoaded", () =>{
 
     document.getElementById("einkaufsliste-create-save").addEventListener("submit", (event) => {
         /* Callback für die Buttons
-           - "neu" -> neuen Eintrag für die LoP abfragen
-           - "sichern" -> aktuelle LoP auf dem Server sichern
+           - "neu" → neuen Eintrag für die LoP abfragen
+           - "sichern" → aktuelle LoP auf dem Server sichern
          */
         if (logEvent) console.log("einkaufsliste-create-save; submit"); // Debug
         if (logEventFull) console.log("einkaufsliste-create-save; submit", event); // Debug
@@ -438,10 +467,10 @@ document.addEventListener("DOMContentLoaded", () =>{
 
     document.getElementById("einkaufsliste-tbody").addEventListener("click", (event) => {
         /* Callback für die Buttons
-           - "speichern" -> Erzeugen eines neuen Eintrags in der LoP anhand der Eingabedaten (CREATE)
-           - "zurück" -> abbrechen der aktiven Aktion
-           - "ändern" -> ändern eines ausgewählten Eintrags in der LoP anhand der Eingabedaten (UPDATE)
-           - "löschen" -> löschen eines ausgewählten Eintrags (DELETE)
+           - "speichern" → Erzeugen eines neuen Eintrags in der LoP anhand der Eingabedaten (CREATE)
+           - "zurück" → abbrechen der aktiven Aktion
+           - "ändern" → ändern eines ausgewählten Eintrags in der LoP anhand der Eingabedaten (UPDATE)
+           - "löschen" → löschen eines ausgewählten Eintrags (DELETE)
          */
         event.preventDefault();
         if (logEvent) console.log("einkaufsliste-list-render; click"); // Debug

@@ -1,0 +1,51 @@
+[
+  {
+    "who": "Constantin",
+    "what": "Pommes",
+    "where": "Gießen",
+    "date": "2023-01-09T00:00:00.000Z",
+    "status": 1
+  },
+  {
+    "who": "Nshuti",
+    "what": "Rice und   Kartoffel",
+    "where": "Rewe Marburg",
+    "date": "2023-01-06T00:00:00.000Z",
+    "status": 1
+  },
+  {
+    "who": "Nshuti",
+    "what": "Rice und   Kartoffel",
+    "where": "Rewe Marburg",
+    "date": "2023-01-06T00:00:00.000Z",
+    "status": 1
+  },
+  {
+    "who": "Constantin",
+    "what": "Pommes",
+    "where": "Gießen",
+    "date": "2023-01-09T00:00:00.000Z",
+    "status": 1
+  },
+  {
+    "who": "coscos",
+    "what": "jhbjhsd",
+    "where": "Rewe Marburg",
+    "date": "2023-01-05T00:00:00.000Z",
+    "status": 1
+  },
+  {
+    "who": "CosCos",
+    "what": "nothing",
+    "where": "Rewe Marburg",
+    "date": "2023-01-06T00:00:00.000Z",
+    "status": 1
+  },
+  {
+    "who": "Fischer",
+    "what": "Öl",
+    "where": "Rewe Gießen",
+    "date": "2023-01-10T00:00:00.000Z",
+    "status": 2
+  }
+]

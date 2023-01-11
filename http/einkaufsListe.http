@@ -22,6 +22,17 @@ Content-Type: application/json
   "status": 1
 }
 
+### create
+POST http://localhost:3000/create
+Content-Type: application/json
+
+{
+"who" : "Aline",
+"what": "Fisch",
+"date": "2023-01-10",
+"where": "Rewe Center Gießen",
+"status": 1
+}
 
 ### create
 POST http://localhost:3000/create
@@ -47,10 +58,6 @@ Content-Type: application/json
 "status": 1
 }
 
-### read
-GET http://localhost:3000/read
-
-
 ### udate
 POST http://localhost:3000/update
 Content-Type: application/json
@@ -60,10 +67,13 @@ Content-Type: application/json
    "who" : "CosCos",
    "what": "nothing",
    "date": "2023-01-06",
-   "where": "Rewe Marburg",
+   "where": "Rewe",
    "status": 1
 }
 
+
+### read
+GET http://localhost:3000/read
 
 
 ### delete
