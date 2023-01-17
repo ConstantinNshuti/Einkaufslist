@@ -17,7 +17,7 @@ Content-Type: application/json
 {
   "who" : "Nshuti",
   "what": "Rice und   Kartoffel",
-  "date": "2023-01-06",
+  "datum": "2023-01-06",
   "where": "Rewe Marburg",
   "status": 1
 }
@@ -27,11 +27,11 @@ POST http://localhost:3000/create
 Content-Type: application/json
 
 {
-"who" : "Aline",
-"what": "Fisch",
-"date": "2023-01-10",
-"where": "Rewe Center Gießen",
-"status": 1
+  "who" : "Alinee",
+  "what": "Fisch",
+  "datum": "2023-01-10",
+  "where": "Rewe Center Gießen",
+  "status": 1
 }
 
 ### create
@@ -39,11 +39,11 @@ POST http://localhost:3000/create
 Content-Type: application/json
 
 {
-"who" : "Constantin",
-"what": "Pommes",
-"date": "2023-01-09",
-"where": "Gießen",
-"status": 1
+  "who" : "Cos",
+  "what": "Pommes",
+  "datum": "2023-01-20",
+  "where": "Gießen",
+  "status": 1
 }
 
 ###create
@@ -51,11 +51,11 @@ POST http://localhost:3000/create
 Content-Type: application/json
 
 {
-"who" : "Fischer",
-"what": "Öl",
-"date": "2023-01-10",
-"where": "Rewe Gießen",
-"status": 1
+  "who" : "Sonja",
+  "what": "Brot",
+  "datum": "2023-01-17",
+  "where": "Gießen",
+  "status": 1
 }
 
 ### udate
@@ -63,12 +63,38 @@ POST http://localhost:3000/update
 Content-Type: application/json
 
 {
-   "id_act": 6,
-   "who" : "CosCos",
-   "what": "nothing",
-   "date": "2023-01-06",
-   "where": "Rewe",
-   "status": 1
+  "id_act": 6,
+  "who" : "CosCos",
+  "what": "nothing",
+  "datum": "2023-01-06",
+  "where": "Rewe",
+  "status": 1
+}
+
+### change
+POST http://localhost:3000/update
+Content-Type: application/json
+
+{
+  "id_act": 11,
+  "who" : "Moses",
+  "what": "Talk",
+  "datum": "2023-01-16",
+  "where": "Rewe",
+  "status": 1
+}
+
+### change
+POST http://localhost:3000/read
+Content-Type: application/json
+
+{
+
+"who" : "Moses",
+"what": "Talk",
+"datum": "2023-01-16",
+"where": "Rewe",
+"status": 1
 }
 
 
@@ -81,5 +107,5 @@ POST http://localhost:3000/delete
 Content-Type: application/json
 
 {
-  "id_act": 7
+  "id_act":  37
 }
