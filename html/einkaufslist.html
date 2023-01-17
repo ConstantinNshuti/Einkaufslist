@@ -1,57 +1,54 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="de">
 <head>
     <meta charset="UTF-8">
-    <title id="version-title-id">Einkauf-Liste - </title>
-    <link rel="stylesheet" type="text/css" href="/styles/einkaufslist.css"/>
+    <title id="version-title-id">Einkaufsliste - </title>
+    <link rel="stylesheet" type="text/css" href="style/einkaufslist.css">
     <script src="script/EinkaufsListe.js"></script>
-    <link rel="icon" type="images/x-icon" href="/images/cart.png">
+    <link rel="icon" type="image/cart" href="favicon.ico">
 </head>
-
 <body>
 <header>
-        <h1 id="version-id">Einkauf-Liste - </h1>
-
+    <h1 id="version-id">Einkaufsliste - </h1>
+    
 </header>
 <main>
-<section class="as-m-t-b section-shadow-box">
+    <section class="as-m-t-b section-shadow-box">
         <div class="shadow-box">
-            <form id="eingabe-basisdaten">
-                <label for="user-name"> Wer: </label>
-                <input id="user-name"  type="text" required placeholder="Wer kauft ein?" >
+            <form id="eingabe-basisdaten" >
+
+                <label for="user-name">Wer: </label>
+                <input id="user-name" name="user-name" type="text" class="button-shadow input-disable" required placeholder="Wer kauft ein?" >
+
             </form>
         </div>
-<div id="einkaufsliste-liste" class="as-unsichtbar shadow-box">
-    <h5> Einkauf-Liste</h5>
-    <div id="einkaufsliste-create-save" class="as-unsichtbar ">
-        <form id="aktionen" class="as-m-t-b">
-            <label for="aktionen">Besorgen: </label>
-            <input  type="submit" class="as-button button-shadow" value="neu">
-            <input  type="submit" class="as-button button-shadow" value="sichern">
-
-        </form>
-    </div>
-        <table id="einkaufsliste-table" class="as-tb-width-100pc ">
-            <thead id="einkaufsliste-thead">
-            <tr>
-                <th class="as-width-15pc" class="besitzer">Wer</th>
-                <th class="as-width-20pc" class="aufgabe">Was</th>
-                <th class="as-width-20pc" class="ort">Wo</th>
-                <th class="as-width-20pc" class="datum">Wann</th>
-
-            </tr>
-            </thead>
-            <tbody id="einkaufsliste-tbody"></tbody>
-
-            <tfoot id="einkaufsliste-tfoot">
-            <tr >
-                <td > </td>
-            </tr>
-            </tfoot>
-
-        </table>
-    </div>
-</section>
+        <div id="einkaufsliste-liste" class="as-unsichtbar shadow-box">
+            <h5>Einkaufsliste</h5>
+            <div id="einkaufsliste-create-save" class="as-unsichtbar">
+                <form id="aktionen" class="as-m-t-b">
+                    <label for="aktionen">Aktionen:</label>
+                    <input type="submit" class="as-button button-shadow" value="neu">
+                    <input type="submit" class="as-button button-shadow" value="sichern">
+                </form>
+            </div>
+            <table class="as-width-100pc" id="einkaufsliste-table">
+                <thead id="einkaufsliste-thead">
+                <tr>
+                    <th class="as-width-15pc" class="besitzer">Wer</th>
+                    <th class="as-width-20pc" class="aufgabe">Was</th>
+                    <th class="as-width-20pc ort">wo</th>
+                    <th class="as-width-20pc" class="datum">Datum</th>
+                </tr>
+                </thead>
+                <tbody id="einkaufsliste-tbody"></tbody>
+                <tfoot id="einkaufsliste-tfoot">
+                <tr>
+                    <td></td>
+                </tr>
+                </tfoot>
+            </table>
+        </div>
+    </section>
 </main>
 <footer class="footer-box footer-shadow">
 
